@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | काला LOWER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black-1: #0a0a0a;
+            --black-2: #121212;
+            --black-3: #1a1a1a;
+            --black-4: #222222;
+            --gray-1: #333333;
+            --gray-2: #444444;
+            --gray-3: #666666;
+            --gray-4: #888888;
+            --gray-5: #aaaaaa;
+            --white: #ffffff;
+            --accent-red: #e63946;
+            --accent-blue: #457b9d;
+            --accent-green: #2a9d8f;
+            --accent-gold: #ffd166;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 80vh;
+            background: rgba(18, 18, 18, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+        }
+
+        /* Left Side - Branding */
+        .brand-side {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(69, 123, 157, 0.1));
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-side::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+        }
+
+        .brand-side::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(69, 123, 157, 0.1) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            z-index: 1;
+        }
+
+        .logo-hindi {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+
+        .logo-english {
+            font-size: 1.2rem;
+            color: var(--gray-5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--white);
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .features {
+            list-style: none;
+            z-index: 1;
+        }
+
+        .features li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-5);
+        }
+
+        .features i {
+            color: var(--accent-green);
+        }
+
+        /* Right Side - Forms */
+        .form-side {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-toggle {
+            display: flex;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--gray-5);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-btn.active {
+            background: var(--accent-red);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .form {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .form-subtitle {
+            color: var(--gray-5);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray-5);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-4);
+            z-index: 1;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(69, 123, 157, 0.1);
+        }
+
+        .input-field.error {
+            border-color: var(--accent-red);
+        }
+
+        .error-message {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray-4);
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .age-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-blue);
+        }
+
+        .checkbox-group label {
+            color: var(--gray-5);
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-red), #c1121f);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--gray-4);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .social-btn.google {
+            color: var(--accent-red);
+        }
+
+        .social-btn.facebook {
+            color: #1877F2;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--gray-5);
+        }
+
+        .back-home a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .brand-side,
+            .form-side {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .brand-side,
+            .form-side {
+                padding: 30px 20px;
+            }
+            
+            .logo-hindi {
+                font-size: 3rem;
+            }
+            
+            .form-toggle {
+                margin-bottom: 30px;
+            }
+            
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+            
+            .age-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side - Branding -->
+        <div class="brand-side">
+            <div class="logo">
+                <div class="logo-hindi">काला</div>
+                <div class="logo-english">LOWER</div>
+            </div>
+            
+            <h2 class="tagline">Premium Black Clothing Experience</h2>
+            
+            <ul class="features">
+                <li><i class="fas fa-check-circle"></i> 750+ Premium Products</li>
+                <li><i class="fas fa-check-circle"></i> Exclusive IPL Collections</li>
+                <li><i class="fas fa-check-circle"></i> Free Delivery (Orders > ₹999)</li>
+                <li><i class="fas fa-check-circle"></i> 15K+ Happy Customers</li>
+                <li><i class="fas fa-check-circle"></i> Secure Shopping Experience</li>
+            </ul>
+            
+            <p style="margin-top: 30px; color: var(--gray-5); text-align: center; font-size: 0.9rem; z-index: 1;">
+                Join India's largest premium black clothing community
+            </p>
+        </div>
+        
+        <!-- Right Side - Forms -->
+        <div class="form-side">
+            <div class="form-container">
+                <!-- Form Toggle -->
+                <div class="form-toggle">
+                    <button class="toggle-btn active" onclick="showForm('login')">Login</button>
+                    <button class="toggle-btn" onclick="showForm('register')">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="form active">
+                    <h2 class="form-title">Welcome Back</h2>
+                    <p class="form-subtitle">Sign in to access your account and continue shopping</p>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" class="input-field" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="error-message" id="loginEmailError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="input-field" id="loginPassword" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="loginPasswordError"></div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                        <a href="#" style="margin-left: auto;">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" onclick="handleLogin(event)">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    
+                    <div class="divider">Or continue with</div>
+                    
+                    <div class="social-login">
+                        <a href="#" class="social-btn google">
+                            <i class="fab fa-google"></i> Google
+                        </a>
+                        <a href="#" class="social-btn facebook">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
+                    </div>
+                    
+                    <p class="back-home">
+                        Don't have an account? <a href="#" onclick="showForm('register')">Create one</a>
+                    </p>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" class="form">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">Join काला LOWER family for exclusive benefits</p>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Full Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="input-field" id="fullName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Phone Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" class="input-field" id="phoneNumber" placeholder="Enter 10-digit mobile number" required>
+                        </div>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" class="input-field" id="registerEmail" placeholder="Enter valid email address" required>
+                        </div>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Create Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="input-field" id="registerPassword" placeholder="Minimum 8 characters" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError"></div>
+                        <div style="color: var(--gray-4); font-size: 0.8rem; margin-top: 5px;">
+                            Must include: uppercase, lowercase, number, special character
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="input-field" id="confirmPassword" placeholder="Re-enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="confirmPasswordError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Age</label>
+                        <div class="age-group">
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar input-icon"></i>
+                                <input type="number" class="input-field" id="age" placeholder="Age" min="13" max="100" required>
+                            </div>
+                            <select class="input-field" id="ageGroup" required>
+                                <option value="">Select Age Group</option>
+                                <option value="13-17">Teen (13-17)</option>
+                                <option value="18-25">Young Adult (18-25)</option>
+                                <option value="26-40">Adult (26-40)</option>
+                                <option value="41-60">Middle Age (41-60)</option>
+                                <option value="61+">Senior (61+)</option>
+                            </select>
+                        </div>
+                        <div class="error-message" id="ageError"></div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" checked>
+                        <label for="newsletter">Send me updates on new collections and offers</label>
+                    </div>
+                    
+                    <button type="button" class="submit-btn" onclick="handleRegister(event)">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="divider">Already have an account?</div>
+                    
+                    <p class="back-home">
+                        <a href="#" onclick="showForm('login')">Sign in to existing account</a> | 
+                        <a href="index.html">Back to Home</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    // Form Toggle Function
+    function showForm(formType) {
+        // Update toggle buttons
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        if (formType === 'login') {
+            document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('registerForm').classList.remove('active');
+        } else {
+            document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
+            document.getElementById('registerForm').classList.add('active');
+            document.getElementById('loginForm').classList.remove('active');
+        }
+    }
+    
+    // Password Toggle Function
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const toggleBtn = input.nextElementSibling;
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+            input.type = 'password';
+            toggleBtn.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+    }
+    
+    // Email Validation
+    function validateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        const invalidDomains = [
+            'tempmail.com', 'mailinator.com', 'guerrillamail.com',
+            '10minutemail.com', 'throwawaymail.com', 'yopmail.com',
+            'fakeinbox.com', 'trashmail.com', 'tempmailaddress.com'
+        ];
+        
+        if (!emailRegex.test(email)) {
+            return { valid: false, message: 'Please enter a valid email address' };
+        }
+        
+        const domain = email.split('@')[1].toLowerCase();
+        if (invalidDomains.includes(domain)) {
+            return { valid: false, message: 'Temporary email addresses are not allowed' };
+        }
+        
+        return { valid: true, message: '' };
+    }
+    
+    // Password Validation
+    function validatePassword(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumbers = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        
+        if (password.length < minLength) {
+            return { valid: false, message: 'Password must be at least 8 characters long' };
+        }
+        
+        if (!hasUpperCase) {
+            return { valid: false, message: 'Password must contain at least one uppercase letter' };
+        }
+        
+        if (!hasLowerCase) {
+            return { valid: false, message: 'Password must contain at least one lowercase letter' };
+        }
+        
+        if (!hasNumbers) {
+            return { valid: false, message: 'Password must contain at least one number' };
+        }
+        
+        if (!hasSpecialChar) {
+            return { valid: false, message: 'Password must contain at least one special character' };
+        }
+        
+        return { valid: true, message: '' };
+    }
+    
+    // Phone Validation
+    function validatePhone(phone) {
+        const phoneRegex = /^[6-9]\d{9}$/;
+        
+        if (!phoneRegex.test(phone)) {
+            return { valid: false, message: 'Please enter a valid 10-digit Indian mobile number' };
+        }
+        
+        return { valid: true, message: '' };
+    }
+    
+    // Name Validation
+    function validateName(name) {
+        if (name.trim().length < 2) {
+            return { valid: false, message: 'Name must be at least 2 characters long' };
+        }
+        
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            return { valid: false, message: 'Name can only contain letters and spaces' };
+        }
+        
+        return { valid: true, message: '' };
+    }
+    
+    // Age Validation
+    function validateAge(age, ageGroup) {
+        const ageNum = parseInt(age);
+        
+        if (ageNum < 13) {
+            return { valid: false, message: 'You must be at least 13 years old to register' };
+        }
+        
+        if (ageNum > 100) {
+            return { valid: false, message: 'Please enter a valid age' };
+        }
+        
+        if (!ageGroup) {
+            return { valid: false, message: 'Please select your age group' };
+        }
+        
+        return { valid: true, message: '' };
+    }
+    
+    // Display Error Function
+    function displayError(inputId, errorId, message) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        
+        input.classList.add('error');
+        error.textContent = message;
+        error.classList.add('show');
+    }
+    
+    // Clear Error Function
+    function clearError(inputId, errorId) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        
+        input.classList.remove('error');
+        error.classList.remove('show');
+    }
+    
+    // Check if user is already logged in
+    async function checkAuth() {
+        try {
+            const response = await fetch('/api/auth/me');
+            const data = await response.json();
+            return data.isAuthenticated;
+        } catch (error) {
+            return false;
+        }
+    }
+    
+    // Register Form Handler - UPDATED WITH BACKEND
+  async function handleRegister(event) {
+    event.preventDefault();
+    console.log('Register button clicked');
+    
+    // Get form values
+    const fullName = document.getElementById('fullName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const age = document.getElementById('age').value;
+    const ageGroup = document.getElementById('ageGroup').value;
+    const terms = document.getElementById('terms').checked;
+    
+    console.log('Form data:', { fullName, phoneNumber, email, age, ageGroup });
+    
+    // ... rest of validation code ...
+    
+    // If valid, send to backend
+    if (isValid) {
+        try {
+            console.log('Sending to backend...');
+            
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullName,
+                    phoneNumber,
+                    email,
+                    password,
+                    age: parseInt(age),
+                    ageGroup
+                })
+            });
+            
+            console.log('Response status:', response.status);
+            const data = await response.json();
+            console.log('Response data:', data);
+            
+            if (data.success) {
+                alert('✅ Registration successful! Welcome to काला LOWER family.');
+                // Redirect to store page
+                window.location.href = '/store';
+            } else {
+                alert('❌ ' + data.message);
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert('❌ Registration failed. Please try again.');
+        }
+    }
+}
+    // Login Form Handler - UPDATED WITH BACKEND
+    async function handleLogin(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const rememberMe = document.getElementById('rememberMe').checked;
+        
+        // Clear errors
+        clearError('loginEmail', 'loginEmailError');
+        clearError('loginPassword', 'loginPasswordError');
+        
+        // Validate email
+        const emailValidation = validateEmail(email);
+        if (!emailValidation.valid) {
+            displayError('loginEmail', 'loginEmailError', emailValidation.message);
+            return;
+        }
+        
+        // Validate password length
+        if (password.length < 6) {
+            displayError('loginPassword', 'loginPasswordError', 'Password must be at least 6 characters');
+            return;
+        }
+        
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                alert('✅ Login successful! Welcome back to काला LOWER.');
+                // Redirect to store page
+                window.location.href = '/store';
+            } else {
+                alert('❌ ' + data.message);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('❌ Login failed. Please try again.');
+        }
+    }
+    
+    // Check if user is already logged in on page load
+    async function checkAndRedirect() {
+        const isAuthenticated = await checkAuth();
+        
+        if (isAuthenticated) {
+            // If already logged in, redirect to store
+            if (confirm('You are already logged in. Go to store?')) {
+                window.location.href = '/store';
+            }
+        } else {
+            // Check localStorage for old data (for migration)
+            const oldUserData = localStorage.getItem('kalaUser');
+            if (oldUserData) {
+                if (confirm('We found your old account data. Would you like to migrate to the new system?')) {
+                    showForm('register');
+                }
+            }
+        }
+    }
+    
+    // Real-time validation for registration form
+    document.getElementById('fullName').addEventListener('blur', function() {
+        const validation = validateName(this.value);
+        if (!validation.valid) {
+            displayError('fullName', 'nameError', validation.message);
+        } else {
+            clearError('fullName', 'nameError');
+        }
+    });
+    
+    document.getElementById('phoneNumber').addEventListener('blur', function() {
+        const validation = validatePhone(this.value);
+        if (!validation.valid) {
+            displayError('phoneNumber', 'phoneError', validation.message);
+        } else {
+            clearError('phoneNumber', 'phoneError');
+        }
+    });
+    
+    document.getElementById('registerEmail').addEventListener('blur', function() {
+        const validation = validateEmail(this.value);
+        if (!validation.valid) {
+            displayError('registerEmail', 'emailError', validation.message);
+        } else {
+            clearError('registerEmail', 'emailError');
+        }
+    });
+    
+    document.getElementById('registerPassword').addEventListener('blur', function() {
+        const validation = validatePassword(this.value);
+        if (!validation.valid) {
+            displayError('registerPassword', 'passwordError', validation.message);
+        } else {
+            clearError('registerPassword', 'passwordError');
+        }
+    });
+    
+    document.getElementById('confirmPassword').addEventListener('blur', function() {
+        const password = document.getElementById('registerPassword').value;
+        if (this.value !== password) {
+            displayError('confirmPassword', 'confirmPasswordError', 'Passwords do not match');
+        } else {
+            clearError('confirmPassword', 'confirmPasswordError');
+        }
+    });
+    
+    // Auto-fill age group based on age
+    document.getElementById('age').addEventListener('blur', function() {
+        const age = parseInt(this.value);
+        const ageGroupSelect = document.getElementById('ageGroup');
+        
+        if (age >= 13 && age <= 17) {
+            ageGroupSelect.value = '13-17';
+        } else if (age >= 18 && age <= 25) {
+            ageGroupSelect.value = '18-25';
+        } else if (age >= 26 && age <= 40) {
+            ageGroupSelect.value = '26-40';
+        } else if (age >= 41 && age <= 60) {
+            ageGroupSelect.value = '41-60';
+        } else if (age >= 61) {
+            ageGroupSelect.value = '61+';
+        }
+    });
+    
+    // Handle Forgot Password
+    document.querySelector('a[href="#"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = prompt('Enter your email to reset password:');
+        if (email) {
+            alert('Password reset link sent to ' + email + ' (In production, email would be sent)');
+        }
+    });
+    
+    // Auto-switch to registration if no user exists
+    window.addEventListener('load', function() {
+        // Check and redirect if already logged in
+        checkAndRedirect();
+        
+        // Show registration form by default
+        showForm('register');
+    });
+</script>
+</body>
+</html>

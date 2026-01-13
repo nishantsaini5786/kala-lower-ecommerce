@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>काला LOWER | Premium Black Lowers & T-Shirts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="hindi">काला</span>
+                <span class="english">LOWER</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p style="color: var(--gray-5); margin-top: 20px;">Loading premium black lowers...</p>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-detail-modal" id="productDetailModal">
+        <div class="product-detail-container" id="productDetailContent">
+            <!-- Product details will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <div class="logo-brand">
+                <div class="logo-icon">KL</div>
+                <div class="brand-text">
+                    <div class="brand-hindi">काला</div>
+                    <div class="brand-english">LOWER</div>
+                </div>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#products" class="nav-link">Lowers</a>
+                <a href="#tshirts" class="nav-link">T-Shirts</a>
+                <a href="#ipl" class="nav-link">IPL Collection</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off">
+                </div>
+                
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <div class="hero-tagline">Premium Black Lowers & T-Shirts</div>
+                    <h1 class="hero-title">
+                        Only Black.<br>
+                        Only Perfect.<br>
+                        Only Authentic.
+                    </h1>
+                    <p class="hero-subtitle">
+                        India's largest collection of premium black lowers and t-shirts. 
+                        From athletic wear to IPL collections, we have the perfect black clothing for every occasion.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">750+</span>
+                            <span class="stat-label">Premium Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Top Brands</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15K+</span>
+                            <span class="stat-label">Happy Customers</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary">
+                            <i class="fas fa-shopping-bag"></i> Shop Lowers
+                        </a>
+                        <a href="#tshirts" class="btn btn-secondary">
+                            <i class="fas fa-tshirt"></i> Shop T-Shirts
+                        </a>
+                        <a href="#ipl" class="btn btn-ipl">
+                            <i class="fas fa-trophy"></i> IPL Collection
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual fade-in">
+                    <div class="model-section">
+                        <div class="model-container">
+                            <div class="model-3d">
+                                <img src="images/top.webp" 
+                                     alt="Black Athletic Lower" class="model-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Shop By Category</h2>
+                <p>Find perfect black clothing for your specific needs</p>
+            </div>
+
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lower Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Premium Black Lowers Collection</h2>
+                <p>Handpicked selection of premium athletic black lowers</p>
+            </div>
+
+            <div class="filters-bar fade-in">
+                <div class="filter-group">
+                    <select class="filter-select" id="sortFilter">
+                        <option value="featured">Sort: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="new">New Arrivals</option>
+                    </select>
+                    <select class="filter-select" id="sizeFilter">
+                        <option value="all">All Sizes</option>
+                        <option value="28">28"</option>
+                        <option value="30">30"</option>
+                        <option value="32">32"</option>
+                        <option value="34">34"</option>
+                        <option value="36">36"</option>
+                        <option value="38">38"</option>
+                    </select>
+                    <select class="filter-select" id="brandFilter">
+                        <option value="all">All Brands</option>
+                        <option value="nike">Nike</option>
+                        <option value="adidas">Adidas</option>
+                        <option value="puma">Puma</option>
+                        <option value="underarmour">Under Armour</option>
+                        <option value="reebok">Reebok</option>
+                        <option value="newbalance">New Balance</option>
+                    </select>
+                </div>
+                <div style="color: var(--gray-5); font-size: 0.9rem;">
+                    Showing <span id="productCount">0</span> products
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Lower products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- T-Shirts Section -->
+    <section class="tshirts-section" id="tshirts">
+        <div class="container">
+            <div class="section-title fade-in">
+                <span class="tshirt-badge"><i class="fas fa-tshirt"></i> T-SHIRTS COLLECTION</span>
+                <h2>Premium Black T-Shirts</h2>
+                <p>Explore our exclusive collection of black t-shirts for men and boys</p>
+            </div>
+
+            <div class="products-grid" id="tshirtsGrid">
+                <!-- T-Shirts will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- IPL T-Shirts Section -->
+    <section class="ipl-section" id="ipl">
+        <div class="container">
+            <div class="section-title fade-in">
+                <span class="ipl-badge"><i class="fas fa-trophy"></i> IPL 2026 COLLECTION</span>
+                <h2>Official IPL Team T-Shirts</h2>
+                <p>Show your support with premium IPL team black t-shirts</p>
+            </div>
+
+            <div class="products-grid" id="iplGrid">
+                <!-- IPL T-Shirts will be loaded by JavaScript -->
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#order" class="btn btn-ipl" style="padding: 15px 40px;">
+                    <i class="fas fa-trophy"></i> Custom IPL Order
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Feature Section -->
+    <section class="order-section" id="order">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Custom Order Form</h2>
+                <p>Order custom black clothing with specific requirements</p>
+            </div>
+
+            <form class="order-form fade-in" id="customOrderForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerName"><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="customerName" class="form-control" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone"><i class="fas fa-phone"></i> Phone Number *</label>
+                        <input type="tel" id="customerPhone" class="form-control" required placeholder="Enter your phone number">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category"><i class="fas fa-tag"></i> Category *</label>
+                        <select id="category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            <option value="lower">Black Lower</option>
+                            <option value="tshirt">Black T-Shirt</option>
+                            <option value="ipl">IPL T-Shirt</option>
+                            <option value="custom">Custom Design</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="size"><i class="fas fa-ruler"></i> Size *</label>
+                        <select id="size" class="form-control" required>
+                            <option value="">Select Size</option>
+                            <option value="28">28" (Lower)</option>
+                            <option value="30">30" (Lower)</option>
+                            <option value="32">32" (Lower)</option>
+                            <option value="s">Small (T-Shirt)</option>
+                            <option value="m">Medium (T-Shirt)</option>
+                            <option value="l">Large (T-Shirt)</option>
+                            <option value="xl">X-Large (T-Shirt)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quantity"><i class="fas fa-box"></i> Quantity *</label>
+                        <input type="number" id="quantity" class="form-control" required min="1" max="50" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="team"><i class="fas fa-trophy"></i> IPL Team (If Applicable)</label>
+                        <select id="team" class="form-control">
+                            <option value="">Select IPL Team</option>
+                            <option value="mumbai">Mumbai Indians</option>
+                            <option value="chennai">Chennai Super Kings</option>
+                            <option value="bangalore">Royal Challengers Bangalore</option>
+                            <option value="kolkata">Kolkata Knight Riders</option>
+                            <option value="delhi">Delhi Capitals</option>
+                            <option value="punjab">Punjab Kings</option>
+                            <option value="rajasthan">Rajasthan Royals</option>
+                            <option value="hyderabad">Sunrisers Hyderabad</option>
+                            <option value="gujarat">Gujarat Titans</option>
+                            <option value="lucknow">Lucknow Super Giants</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="requirements"><i class="fas fa-clipboard-list"></i> Special Requirements</label>
+                    <textarea id="requirements" class="form-control" rows="3" placeholder="Any specific requirements like design, material, fit type, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryDate"><i class="fas fa-calendar-alt"></i> Expected Delivery Date</label>
+                    <input type="date" id="deliveryDate" class="form-control">
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Custom Order
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social Media Shortcuts -->
+    <section class="social-shortcuts fade-in" id="socialShortcuts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Connect With Us</h2>
+                <p>Follow us on social media for latest collections and offers</p>
+            </div>
+
+            <div class="shortcuts-grid">
+                <a href="https://www.instagram.com/nishantt_sainii" target="_blank" class="shortcut-item">
+                    <div class="shortcut-icon" style="background: linear-gradient(135deg, #E1306C, #C13584);">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="shortcut-text">
+                        <h4>Instagram</h4>
+                        <p>Follow for latest collections, behind the scenes, and exclusive offers</p>
+                    </div>
+                </a>
+
+                <a href="https://wa.me/919625700719" target="_blank" class="shortcut-item">
+                    <div class="shortcut-icon" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="shortcut-text">
+                        <h4>WhatsApp</h4>
+                        <p>Order & Enquiry: +91 96257 00719. Quick response guaranteed</p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/nishantt_sainii" target="_blank" class="shortcut-item">
+                    <div class="shortcut-icon" style="background: linear-gradient(135deg, #1877F2, #0A5BC4);">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="shortcut-text">
+                        <h4>Facebook</h4>
+                        <p>Join our community of 50K+ satisfied customers</p>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/@Codewithnishant0143" target="_blank" class="shortcut-item">
+                    <div class="shortcut-icon" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="shortcut-text">
+                        <h4>YouTube</h4>
+                        <p>Watch product reviews, styling tips, and collection launches</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Amount:</span>
+                <span id="cartTotalAmount">₹0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="brand-hindi">काला</div>
+                    <div class="brand-english">LOWER</div>
+                    <p class="footer-description">
+                        India's premier black clothing specialist since 2015. 
+                        We provide premium quality black lowers and t-shirts 
+                        with exclusive collections and custom designs.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/nishantt_sainii" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/nishantt_sainii" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/919625700719" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@Codewithnishant0143" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-categories">
+                    <h4 class="footer-heading">Collections</h4>
+                    <div class="footer-links">
+                        <a href="#products" class="footer-link"><i class="fas fa-chevron-right"></i> Black Lowers</a>
+                        <a href="#tshirts" class="footer-link"><i class="fas fa-chevron-right"></i> T-Shirts</a>
+                        <a href="#ipl" class="footer-link"><i class="fas fa-chevron-right"></i> IPL Collection</a>
+                        <a href="#categories" class="footer-link"><i class="fas fa-chevron-right"></i> Premium Collection</a>
+                        <a href="#order" class="footer-link"><i class="fas fa-chevron-right"></i> Custom Orders</a>
+                        <a href="#order" class="footer-link"><i class="fas fa-chevron-right"></i> Bulk Orders</a>
+                    </div>
+                </div>
+
+                <div class="footer-brands">
+                    <h4 class="footer-heading">Top Brands</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Nike</a>
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Adidas</a>
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Puma</a>
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Under Armour</a>
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Reebok</a>
+                        <a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> New Balance</a>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 96257 00719</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Uttar Pradesh, Delhi, Haryana</p>
+                    <p><i class="fas fa-clock"></i> 9:00 AM - 9:00 PM (Monday - Sunday)</p>
+                    <p><i class="fas fa-truck"></i> Free Delivery on orders above ₹999</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> काला LOWER - Premium Black Clothing. All rights reserved.</p>
+                <p style="margin-top: 10px; color: var(--gray-4); font-size: 0.8rem;">
+                    Designed By SAINI • Only Black • Only Perfect • Only Authentic
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
