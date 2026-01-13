@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: kala-lower-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://nishant_saini:nishant5786@clustersaini.ttzjaag.mongodb.net/kala-lower-db?retryWrites=true&w=majority
+      - key: PORT
+        value: 10000
+    plan: free
