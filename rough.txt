@@ -3827,3 +3827,5 @@ document.addEventListener('error', function(e) {
 
 // Handle touch events for mobile
 document.addEventListener('touchstart', function() {}, {passive: true});
+
+git remote add origin https://github.com/nishantsaini5786/kala-lower-ecommerce.git
