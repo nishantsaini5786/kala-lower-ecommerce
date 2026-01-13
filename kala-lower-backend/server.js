@@ -1,18 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
 
-// ---------------------------
-// 🔥 CORS CONFIG FOR RENDER + NETLIFY
-// ---------------------------
 const allowedOrigins = [
-  "http://localhost:5500",               // Localhost
-  "https://kala-lower.netlify.app"       // 👉 Your Netlify domain (change if needed)
+  "http://localhost:5500",
+  "https://kala-lower.netlify.app",   
 ];
 
 app.use(cors({
@@ -21,64 +18,100 @@ app.use(cors({
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("❌ Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true
 }));
 
+
+// Middleware
+// app.use(cors());
 app.use(express.json());
 
-// ---------------------------
-// 🔥 MongoDB Connection
-// ---------------------------
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Atlas Connected Successfully!"))
-  .catch(err => console.error("❌ MongoDB Failed:", err));
+// MongoDB Atlas Connection
+const mongoURI = `mongodb+srv://nishant_saini:nishant5786@clustersaini.ttzjaag.mongodb.net/kala-lower-db?retryWrites=true&w=majority`;
 
-// ---------------------------
-// 🔥 User Schema
-// ---------------------------
+mongoose.connect(mongoURI)
+  .then(() => console.log('✅ MongoDB Connected!'))
+  .catch(err => console.error('❌ MongoDB Error:', err));
+
+
+// User Schema
 const UserSchema = new mongoose.Schema({
-  fullName: String,
-  phoneNumber: { type: String, unique: true },
-  email: { type: String, unique: true },
-  password: String,
-  age: Number,
-  ageGroup: String,
+  fullName: { type: String, required: true },
+  phoneNumber: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true, lowercase: true },
+  password: { type: String, required: true },
+  age: { type: Number, required: true },
+  ageGroup: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  lastLogin: Date
+  lastLogin: { type: Date },
+  isActive: { type: Boolean, default: true }
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
-// ---------------------------
-// 🔥 REGISTER API
-// ---------------------------
+// 🔐 JWT SECRET
+const JWT_SECRET = process.env.JWT_SECRET || "KALA_LOWER_SECRET_786";
+
+// 🔏 AUTH MIDDLEWARE (Token Verify)
+function authMiddleware(req, res, next) {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "No token provided"
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or expired token"
+    });
+  }
+}
+
+// ----------------------------------------------------------
+// 1️⃣ REGISTER API
+// ----------------------------------------------------------
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { fullName, phoneNumber, email, password, age, ageGroup } = req.body;
 
-    const existing = await User.findOne({ $or: [{ email }, { phoneNumber }] });
-    if (existing) {
+    const existingUser = await User.findOne({
+      $or: [{ email }, { phoneNumber }]
+    });
+
+    if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: "User already exists with this Email/Phone"
+        message: existingUser.email === email
+          ? "Email already exists"
+          : "Phone number already exists"
       });
     }
 
-    const hashedPass = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
+    const user = new User({
       fullName,
       phoneNumber,
       email,
-      password: hashedPass,
+      password: hashedPassword,
       age,
       ageGroup
     });
 
-    return res.status(201).json({
+    await user.save();
+
+    res.status(201).json({
       success: true,
       message: "Registration successful!",
       user: {
@@ -89,28 +122,34 @@ app.post('/api/auth/register', async (req, res) => {
     });
 
   } catch (err) {
-    console.log("Registration Error:", err);
-    res.status(500).json({ success: false, message: "Server Error" });
+    console.error("Register Error:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-// ---------------------------
-// 🔥 LOGIN API + JWT TOKEN
-// ---------------------------
+// ----------------------------------------------------------
+// 2️⃣ LOGIN API + JWT TOKEN
+// ----------------------------------------------------------
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.json({ success: false, message: "Invalid email or password" });
+    if (!user)
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.json({ success: false, message: "Invalid email or password" });
+    const checkPass = await bcrypt.compare(password, user.password);
+    if (!checkPass)
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
 
-    // Token
+    // Create JWT Token
     const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET || "KALA_LOWER_SECRET_786",
+      {
+        id: user._id,
+        email: user.email,
+        fullName: user.fullName
+      },
+      JWT_SECRET,
       { expiresIn: "7d" }
     );
 
@@ -130,20 +169,37 @@ app.post('/api/auth/login', async (req, res) => {
     });
 
   } catch (err) {
-    console.log("Login Error:", err);
-    res.status(500).json({ success: false, message: "Server Error" });
+    console.error("Login Error:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-// ---------------------------
-// 🔥 PROTECTED ROUTE
-// ---------------------------
-app.get('/api/auth/me', (req, res) => {
-  res.json({ success: true, message: "JWT implemented successfully!" });
+
+// ----------------------------------------------------------
+// 3️⃣ PROTECTED ROUTE → CHECK LOGIN
+// ----------------------------------------------------------
+app.get('/api/auth/me', authMiddleware, async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password");
+  res.json({
+    success: true,
+    user
+  });
 });
 
-// ---------------------------
-// 🔥 START SERVER
-// ---------------------------
+// ----------------------------------------------------------
+// 4️⃣ ADMIN — GET ALL USERS (remove in production)
+// ----------------------------------------------------------
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.json({ success: true, users });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// ----------------------------------------------------------
+// START SERVER
+// ----------------------------------------------------------
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
